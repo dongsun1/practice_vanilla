@@ -16,24 +16,15 @@ header {
 }
 
 .header {
-  position: absolute;
   padding: 0px 20px;
 }
 
-.header_left {
-  left: 15px;
-}
+.header_left {}
 
-.header_right {
-  right: 15px;
-}
+.header_right {}
 
 #page_content {
   padding: 20px;
-}
-
-.menu_name:hover {
-  cursor: pointer;
 }
 
 .content_title {
@@ -56,9 +47,6 @@ header {
   transform-origin: center right;
   transition: transform 1s;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, .2);
-  width: 200px;
-  height: 200px;
-  cursor: pointer;
 }
 
 .card.is-flipped {
@@ -74,23 +62,14 @@ header {
   font-size: 20px;
   color: black;
   backface-visibility: hidden;
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 700;
-  font-size: 40px;
-  color: white;
 }
 
 .card_plane--front {
-  background: #0d0d0d;
+  background: #F2F2F2;
 }
 
 .card_plane--back {
   transform: rotateY(180deg);
-  background: #F2F2F2;
-  color: #3098F2;
 }
 
 /* 인사 정보 등록 페이지 */
@@ -113,8 +92,6 @@ header {
   border-radius: 1rem;
   box-sizing: border-box;
   background: none;
-  font-size: 1.0em;
-  color: #5A5C66;
 }
 
 .form_elem select {
@@ -124,8 +101,6 @@ header {
   border-radius: 1rem;
   box-sizing: border-box;
   background: none;
-  font-size: 1.0em;
-  color: #5A5C66;
 }
 
 .form_elem button {
@@ -135,31 +110,4 @@ header {
   border-radius: 1rem;
   box-sizing: border-box;
   background: #dedede;
-  font-size: 1.0em;
-  background: #29323C;
-  color: #ffffff;
-}
-
-.form_elem button:hover {
-  cursor: pointer;
-  background: #637488;
-}
-
-#cards_container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-content: space-around;
-}
-
-.form_elem label {
-  display: flex;
-  padding: 3px 5px;
-  font-size: 0.7em;
-  color: #5A5C66;
-}
-
-span.mark {
-  color: #ff0000;
 }
