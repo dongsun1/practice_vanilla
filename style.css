@@ -16,12 +16,21 @@ header {
 }
 
 .header {
+  position: absolute;
   padding: 0px 20px;
 }
 
-.header_left {}
+.header_left {
+  left: 15px;
+}
 
-.header_right {}
+.header_right {
+  right: 15px;
+}
+
+.menu_name {
+  cursor: pointer;
+}
 
 #page_content {
   padding: 20px;

@@ -3,7 +3,7 @@ class Header {
     this.$target = $target
   }
 
-  createElement({ divClass, id, text }) {
+  createElement({ divClass, id, text, url }) {
     const div = document.createElement('div')
     div.setAttribute('class', divClass)
 
@@ -11,6 +11,13 @@ class Header {
     span.setAttribute('class', 'menu_name')
     span.setAttribute('id', id)
     span.appendChild(document.createTextNode(text))
+
+    span.addEventListener('click', () => {
+      window.history.pushState('', '', url)
+      const urlChange = new CustomEvent('urlChange', { detail: { url } })
+      document.dispatchEvent(urlChange)
+    })
+
     div.appendChild(span)
 
     return div
@@ -18,8 +25,8 @@ class Header {
 
   render() {
     const header = document.createElement('header')
-    const home_menu = this.createElement({ divClass: 'header header_left', id: 'menu_home', text: 'HOME' })
-    const signup_menu = this.createElement({ divClass: 'header header_right', id: 'menu_signup', text: 'SIGNUP' })
+    const home_menu = this.createElement({ divClass: 'header header_left', id: 'menu_home', text: 'HOME', url: '/web' })
+    const signup_menu = this.createElement({ divClass: 'header header_right', id: 'menu_signup', text: 'SIGNUP', url: '/web/signup' })
 
     header.appendChild(home_menu)
     header.appendChild(signup_menu)
