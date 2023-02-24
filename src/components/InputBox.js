@@ -40,7 +40,6 @@ class InputBox {
     }
 
     if (this.required) $input.setAttribute('required', '')
-
     $span.appendChild($input)
 
     this.$target.appendChild($span)
