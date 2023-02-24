@@ -1,55 +1,56 @@
-import { cardDiv, cardPlane } from "./Card.js";
-import { setCardStatus } from "./Storage.js";
+import { setCardStatus, setPersonalInfo } from "../lib/setLocalStorage.js"
+import Card from "./Card.js"
 
 class CardView {
-  constructor($main) {
-    this.$main = $main
+  constructor({ $target }) {
+    this.$target = $target
   }
 
-  infiniteScroll(container, localStorage) {
-    let target = document.querySelector('#cards_container').lastChild
+  infiniteScroll({ $target, personalInfo }) {
+    let lastChild = document.querySelector('#cards_container').lastChild
 
-    const io = new IntersectionObserver((entry, observer) => {
+    const io = new IntersectionObserver(entry => {
       if (entry[0].isIntersecting) {
         io.unobserve(entry[0].target)
 
-        const start = Number(target.getAttribute('idx')) + 1
-        const end = start + 4 > localStorage.length ? localStorage.length : start + 4
-
+        const start = Number(lastChild.getAttribute('idx')) + 1
+        const end = start + 4 > personalInfo.length ? personalInfo.length : start + 4
         for (let i = start; i < end; i++) {
-          const card = cardDiv(i)
-          card.appendChild(cardPlane('front', localStorage[i].nickname))
-          card.appendChild(cardPlane('back', localStorage[i].mbti))
-
-          container.appendChild(card)
+          new Card({ $target, idx: i, ...personalInfo[i] }).render()
         }
 
-        target = document.querySelector('#cards_container').lastChild
-        io.observe(target)
+        lastChild = document.querySelector('#cards_container').lastChild
+        io.observe(lastChild)
       }
     }, { threshold: 0.7 })
 
-
-    io.observe(target)
+    io.observe(lastChild)
   }
 
-  render() {
-    const containerDiv = document.createElement("div");
-    containerDiv.setAttribute('id', 'cards_container')
-    this.$main.appendChild(containerDiv)
-
-    const personalInfo = JSON.parse(localStorage.getItem("personalInfo"))
+  async render() {
+    await setPersonalInfo()
     setCardStatus()
 
-    for (let i = 0; i < 4; i++) {
-      const card = cardDiv(i)
-      card.appendChild(cardPlane('front', personalInfo[i].nickname))
-      card.appendChild(cardPlane('back', personalInfo[i].mbti))
+    const $div = document.createElement('div')
+    $div.setAttribute('id', 'cards_container')
 
-      containerDiv.appendChild(card)
+    const personalInfo = JSON.parse(localStorage.getItem('personalInfo'))
+
+    for (let i = 0; i < 4; i++) {
+      new Card({ $target: $div, idx: i, ...personalInfo[i] }).render()
     }
 
-    this.infiniteScroll(containerDiv, personalInfo)
+    this.$target.appendChild($div)
+
+    this.infiniteScroll({ $target: $div, personalInfo })
   }
 }
-export default CardView;
+
+export default CardView
+
+{/* <div id="cards_container">
+  <div idx="1" class="card">
+    <div class="card_plane card_plane--front">Heedo</div>
+    <div class="card_plane card_plane--back">ESTJ</div>
+  </div>
+</div> */}

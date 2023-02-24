@@ -1,39 +1,38 @@
 class Header {
-    constructor($body) {
-        this.$body = $body
-    }
+  constructor({ $target }) {
+    this.$target = $target
+  }
 
-    createMenuElem(divClass, spanClass, spanId, menuText, url) {
-        const div = document.createElement('div')
-        div.setAttribute('class', divClass)
+  createElement({ divClass, id, text, url }) {
+    const div = document.createElement('div')
+    div.setAttribute('class', divClass)
 
-        const span = document.createElement('span')
-        span.setAttribute('class', spanClass)
-        span.setAttribute('id', spanId)
-        span.appendChild(document.createTextNode(menuText))
+    const span = document.createElement('span')
+    span.setAttribute('class', 'menu_name')
+    span.setAttribute('id', id)
+    span.appendChild(document.createTextNode(text))
 
-        div.appendChild(span)
+    span.addEventListener('click', () => {
+      window.history.pushState('', '', url)
+      const urlChange = new CustomEvent('urlChange', { detail: { url } })
+      document.dispatchEvent(urlChange)
+    })
 
-        span.addEventListener('click', () => {
-            window.history.pushState('', '', url)
-            const urlChange = new CustomEvent('urlChange', {
-                detail: { href: url }
-            })
-            document.dispatchEvent(urlChange)
-        })
+    div.appendChild(span)
 
-        return div
-    }
+    return div
+  }
 
-    render() {
-        const header = document.createElement("header");
-        const home_menu = this.createMenuElem('header header_left', 'menu_name', 'menu_home', 'HOME', '/web/')
-        const signup_menu = this.createMenuElem("header header_right", "menu_name", "menu_signup", "SIGNUP", '/web/signup');
+  render() {
+    const header = document.createElement('header')
+    const home_menu = this.createElement({ divClass: 'header header_left', id: 'menu_home', text: 'HOME', url: '/web' })
+    const signup_menu = this.createElement({ divClass: 'header header_right', id: 'menu_signup', text: 'SIGNUP', url: '/web/signup' })
 
-        header.appendChild(home_menu);
-        header.appendChild(signup_menu);
-        this.$body.appendChild(header);
-    }
+    header.appendChild(home_menu)
+    header.appendChild(signup_menu)
+
+    this.$target.appendChild(header)
+  }
 }
 
-export default Header;
+export default Header

@@ -1,17 +1,16 @@
-import CardView from "../components/CardView.js";
-import ContentTitle from "../components/ContentTitle.js";
+import CardView from "../components/CardView.js"
+import ContentTitle from "../components/ContentTitle.js"
 
 class HomePage {
-  constructor($main) {
-    this.$main = $main;
+  constructor({ $target }) {
+    this.$target = $target
   }
 
   render() {
-    const title = new ContentTitle(this.$main, 'Great PeoPle')
-    title.render()
-
-    const cardView = new CardView(this.$main)
-    cardView.render()
+    new ContentTitle({ $target: this.$target, title: 'Great PeoPle' }).render()
+    new CardView({ $target: this.$target }).render()
   }
 }
-export default HomePage;
+
+export default HomePage
+

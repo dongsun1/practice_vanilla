@@ -28,12 +28,12 @@ header {
   right: 15px;
 }
 
-#page_content {
-  padding: 20px;
+.menu_name {
+  cursor: pointer;
 }
 
-.menu_name:hover {
-  cursor: pointer;
+#page_content {
+  padding: 20px;
 }
 
 .content_title {
@@ -42,6 +42,8 @@ header {
 
 /* 인사 정보 페이지 */
 #cards_container {
+  display: flex;
+  flex-wrap: wrap;
   width: 80%;
   margin: 10px auto;
   padding: 10px 10px;
@@ -49,16 +51,14 @@ header {
 
 .card {
   margin: 20px 10px;
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 260px;
+  cursor: pointer;
   border-radius: 25px;
   transform-style: preserve-3d;
   transform-origin: center right;
   transition: transform 1s;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, .2);
-  width: 200px;
-  height: 200px;
-  cursor: pointer;
 }
 
 .card.is-flipped {
@@ -84,7 +84,7 @@ header {
 }
 
 .card_plane--front {
-  background: #0d0d0d;
+  background: #0D0D0D;
 }
 
 .card_plane--back {
@@ -134,23 +134,14 @@ header {
   border: 0;
   border-radius: 1rem;
   box-sizing: border-box;
-  background: #dedede;
-  font-size: 1.0em;
   background: #29323C;
-  color: #ffffff;
+  font-size: 1.0em;
+  color: white;
 }
 
 .form_elem button:hover {
   cursor: pointer;
   background: #637488;
-}
-
-#cards_container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-content: space-around;
 }
 
 .form_elem label {
@@ -160,6 +151,6 @@ header {
   color: #5A5C66;
 }
 
-span.mark {
-  color: #ff0000;
+.mark {
+  color: red;
 }

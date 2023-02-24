@@ -1,44 +1,41 @@
-import Header from "./components/Header.js";
-import { setPersonalInfo } from "./components/Storage.js";
-import HomePage from "./page/HomePage.js";
-import SignupPage from "./page/SignupPage.js";
+import Header from "./components/Header.js"
+import HomePage from "./page/HomePage.js"
+import SignupPage from "./page/SignupPage.js"
 
 class App {
-    constructor($body) {
-        this.$body = $body;
-        this.render();
-    }
+  constructor({ $target }) {
+    this.$target = $target
+    this.render()
+  }
 
-    async render() {
-        await setPersonalInfo();
+  render() {
+    new Header({ $target: this.$target }).render()
 
-        new Header(this.$body).render()
+    const $main = document.createElement('main')
+    $main.setAttribute('id', 'page_content')
 
-        const main = document.createElement('main')
-        main.setAttribute('id', "page_content")
-        this.$body.appendChild(main)
+    this.$target.appendChild($main)
 
-        const homePage = new HomePage(main)
-        const signupPage = new SignupPage(main)
+    const homePage = new HomePage({ $target: $main })
+    const signupPage = new SignupPage({ $target: $main })
 
-        homePage.render()
+    homePage.render()
 
-        document.addEventListener('urlChange', (e) => {
-            const pathname = e.detail.href
-            main.innerHTML = ''
+    document.addEventListener('urlChange', ({ detail: { url } }) => {
+      $main.innerHTML = ''
 
-            switch (pathname) {
-                case '/web/':
-                    homePage.render()
-                    break
-                case '/web/signup':
-                    signupPage.render()
-                    break
-                default:
-                    break
-            }
-        })
-    }
+      switch (url) {
+        case '/web':
+          homePage.render()
+          break
+        case '/web/signup':
+          signupPage.render()
+          break
+        default:
+          break
+      }
+    })
+  }
 }
 
-export default App;
+export default App
