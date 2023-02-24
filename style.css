@@ -42,6 +42,8 @@ header {
 
 /* 인사 정보 페이지 */
 #cards_container {
+  display: flex;
+  flex-wrap: wrap;
   width: 80%;
   margin: 10px auto;
   padding: 10px 10px;
@@ -49,8 +51,9 @@ header {
 
 .card {
   margin: 20px 10px;
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 260px;
+  cursor: pointer;
   border-radius: 25px;
   transform-style: preserve-3d;
   transform-origin: center right;
@@ -71,14 +74,23 @@ header {
   font-size: 20px;
   color: black;
   backface-visibility: hidden;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 40px;
+  color: white;
 }
 
 .card_plane--front {
-  background: #F2F2F2;
+  background: #0D0D0D;
 }
 
 .card_plane--back {
   transform: rotateY(180deg);
+  background: #F2F2F2;
+  color: #3098F2;
 }
 
 /* 인사 정보 등록 페이지 */
@@ -101,6 +113,8 @@ header {
   border-radius: 1rem;
   box-sizing: border-box;
   background: none;
+  font-size: 1.0em;
+  color: #5A5C66;
 }
 
 .form_elem select {
@@ -110,6 +124,8 @@ header {
   border-radius: 1rem;
   box-sizing: border-box;
   background: none;
+  font-size: 1.0em;
+  color: #5A5C66;
 }
 
 .form_elem button {
@@ -118,5 +134,23 @@ header {
   border: 0;
   border-radius: 1rem;
   box-sizing: border-box;
-  background: #dedede;
+  background: #29323C;
+  font-size: 1.0em;
+  color: white;
+}
+
+.form_elem button:hover {
+  cursor: pointer;
+  background: #637488;
+}
+
+.form_elem label {
+  display: flex;
+  padding: 3px 5px;
+  font-size: 0.7em;
+  color: #5A5C66;
+}
+
+.mark {
+  color: red;
 }

@@ -14,10 +14,9 @@ class CardView {
         io.unobserve(entry[0].target)
 
         const start = Number(lastChild.getAttribute('idx')) + 1
-        const end = start + 4 > localStorage.length ? localStorage.length : start + 4
-
+        const end = start + 4 > personalInfo.length ? personalInfo.length : start + 4
         for (let i = start; i < end; i++) {
-          new Card({ $target, idx: i, ...personalInfo })
+          new Card({ $target, idx: i, ...personalInfo[i] }).render()
         }
 
         lastChild = document.querySelector('#cards_container').lastChild
